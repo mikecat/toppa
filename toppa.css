@@ -32,10 +32,12 @@ body {
 #gameBoard div {
 	margin: 0.5ex;
 	line-height: 0;
+	background-color: #ddd;
 }
 
 #gameBoard img {
 	width: 100%;
 	height: 100%;
-	max-height: calc((100vh - 9em) / 4);
+	max-height: 15vh;
+	object-fit: contain;
 }
