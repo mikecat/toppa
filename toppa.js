@@ -1,19 +1,8 @@
 "use strict";
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
 	const elems = {};
 	document.querySelectorAll("[id]").forEach((elem) => elems[elem.id] = elem);
-
-	const STATUS_INITIAL = 0;
-	const STATUS_COUNTDOWN = STATUS_INITIAL + 1;
-	const STATUS_GAME = STATUS_COUNTDOWN + 1;
-	const STATUS_FINISH = STATUS_GAME + 1;
-	const STATUS_RESULT = STATUS_FINISH + 1;
-
-	const ANIME_STATUS_NONE = 0;
-	const ANIME_STATUS_INITIAL = ANIME_STATUS_NONE + 1;
-	const ANIME_STATUS_MOVE = ANIME_STATUS_INITIAL + 1;
-	const ANIME_STATUS_CHANGE = ANIME_STATUS_MOVE + 1;
 
 	const images = {
 		[-2]: "img/b.png",
@@ -26,6 +15,42 @@ window.addEventListener("DOMContentLoaded", () => {
 		5: "img/5.png",
 		6: "img/6.png",
 	};
+
+	async function fetchImage(key, path) {
+		const res = await fetch(path);
+		if (!res.ok) throw "fetching " + path + " failed with status " + res.status;
+		const blob = await res.blob();
+		images[key] = URL.createObjectURL(blob);
+	}
+	try {
+		await Promise.all([
+			fetchImage(-2, "img/b.png"),
+			fetchImage(-1, "img/a.png"),
+			fetchImage(0, "empty.png"),
+			fetchImage(1, "img/1.png"),
+			fetchImage(2, "img/2.png"),
+			fetchImage(3, "img/3.png"),
+			fetchImage(4, "img/4.png"),
+			fetchImage(5, "img/5.png"),
+			fetchImage(6, "img/6.png"),
+		]);
+	} catch (e) {
+		console.error(e);
+		elems.gameBoard.classList.add("gameLoadError");
+		return;
+	}
+
+	const STATUS_INITIAL = 0;
+	const STATUS_COUNTDOWN = STATUS_INITIAL + 1;
+	const STATUS_GAME = STATUS_COUNTDOWN + 1;
+	const STATUS_FINISH = STATUS_GAME + 1;
+	const STATUS_RESULT = STATUS_FINISH + 1;
+
+	const ANIME_STATUS_NONE = 0;
+	const ANIME_STATUS_INITIAL = ANIME_STATUS_NONE + 1;
+	const ANIME_STATUS_MOVE = ANIME_STATUS_INITIAL + 1;
+	const ANIME_STATUS_CHANGE = ANIME_STATUS_MOVE + 1;
+
 	const scoreAndTimeDelta = {
 		[-2]: {score: 768, time: 0},
 		[-1]: {score: 384, time: 0},
@@ -40,6 +65,8 @@ window.addEventListener("DOMContentLoaded", () => {
 	const initialTimeLimit = 90; // s
 	const animeMoveTime = 100; // ms
 	const animeChangeTime = 200; // ms
+
+	elems.gameBoard.classList.add("gameInitial");
 
 	let status = STATUS_INITIAL;
 	let gameStartTime = 0;

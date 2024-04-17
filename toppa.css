@@ -124,3 +124,16 @@ body {
 #gameBoard:not(.gameResult) #postButton {
 	display: none;
 }
+
+#loadErrorArea {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	font-size: 200%;
+	width: 100%;
+	z-index: 2;
+}
+
+#gameBoard:not(.gameLoadError) #loadErrorArea {
+	display: none;
+}
