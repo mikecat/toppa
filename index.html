@@ -5,6 +5,7 @@
 		<link rel="icon" href="to.ico">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link href="toppa.css" rel="stylesheet">
+		<script src="toppa.js"></script>
 		<title>とっぱ</title>
 	</head>
 	<body>
@@ -15,23 +16,81 @@
 				<div>Score: <span id="scoreArea">0</span></div>
 				<div>Count: <span id="countArea">0</span></div>
 			</div>
-			<div id="gameBoard">
-				<div><img id="g00" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g01" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g02" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g03" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g10" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g11" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g12" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g13" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g20" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g21" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g22" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g23" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g30" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g31" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g32" src="empty.png" width="128" height="128" alt=""></div>
-				<div><img id="g33" src="empty.png" width="128" height="128" alt=""></div>
+			<div id="gameBoard" class="gameInitial">
+				<div class="imgWrapper">
+					<img id="g00" src="empty.png" width="128" height="128" alt="">
+					<img id="pg00" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g01" src="empty.png" width="128" height="128" alt="">
+					<img id="pg01" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g02" src="empty.png" width="128" height="128" alt="">
+					<img id="pg02" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g03" src="empty.png" width="128" height="128" alt="">
+					<img id="pg03" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g10" src="empty.png" width="128" height="128" alt="">
+					<img id="pg10" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g11" src="empty.png" width="128" height="128" alt="">
+					<img id="pg11" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g12" src="empty.png" width="128" height="128" alt="">
+					<img id="pg12" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g13" src="empty.png" width="128" height="128" alt="">
+					<img id="pg13" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g20" src="empty.png" width="128" height="128" alt="">
+					<img id="pg20" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g21" src="empty.png" width="128" height="128" alt="">
+					<img id="pg21" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g22" src="empty.png" width="128" height="128" alt="">
+					<img id="pg22" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g23" src="empty.png" width="128" height="128" alt="">
+					<img id="pg23" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g30" src="empty.png" width="128" height="128" alt="">
+					<img id="pg30" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g31" src="empty.png" width="128" height="128" alt="">
+					<img id="pg31" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g32" src="empty.png" width="128" height="128" alt="">
+					<img id="pg32" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<div class="imgWrapper">
+					<img id="g33" src="empty.png" width="128" height="128" alt="">
+					<img id="pg33" class="prevImg" src="empty.png" width="128" height="128" alt="">
+				</div>
+				<button id="startButton">スタート<br>(Space)</button>
+				<div id="countdownArea">
+					START
+				</div>
+				<div id="finishArea">
+					FINISH
+				</div>
+				<button id="retryButton">リトライ<br>(Space)</button>
+				<button id="postButton">ポスト<br>(ツイート)</button>
+				<a id="postLink" href="#" target="_blank">-</a>
 			</div>
 		</div>
 	</body>
