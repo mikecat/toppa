@@ -443,24 +443,32 @@ window.addEventListener("DOMContentLoaded", async () => {
 	}
 
 	window.addEventListener("keydown", (event) => {
-		switch (event.key) {
+		switch (event.key.toLowerCase()) {
 			case " ":
 				gameStart();
 				event.preventDefault();
 				break;
-			case "ArrowLeft":
+			case "arrowleft":
+			case "a":
+			case "h":
 				gameMoveLeft();
 				if (shouldPreventArrowDefault()) event.preventDefault();
 				break;
-			case "ArrowRight":
+			case "arrowright":
+			case "d":
+			case "l":
 				gameMoveRight();
 				if (shouldPreventArrowDefault()) event.preventDefault();
 				break;
-			case "ArrowUp":
+			case "arrowup":
+			case "w":
+			case "k":
 				gameMoveUp();
 				if (shouldPreventArrowDefault()) event.preventDefault();
 				break;
-			case "ArrowDown":
+			case "arrowdown":
+			case "s":
+			case "j":
 				gameMoveDown();
 				if (shouldPreventArrowDefault()) event.preventDefault();
 				break;
