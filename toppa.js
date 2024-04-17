@@ -289,15 +289,22 @@ window.addEventListener("DOMContentLoaded", async () => {
 		}
 	}
 
+	function getBoardWithoutElimination(y, x) {
+		if (gameBoard[y][x]) return gameBoard[y][x];
+		if (gameBoardChangeFrom[y][x]) return gameBoardChangeFrom[y][x];
+		return 0;
+	}
+
 	function gameCanMove() {
 		for (let i = 0; i < 4; i++) {
 			for (let j = 0; j < 4; j++) {
-				if (gameBoard[i][j] !== 0) {
-					const judge = (value) => value === 0 || value === gameBoard[i][j];
-					if (i > 0 && judge(gameBoard[i - 1][j])) return true;
-					if (i < 3 && judge(gameBoard[i + 1][j])) return true;
-					if (j > 0 && judge(gameBoard[i][j - 1])) return true;
-					if (j < 3 && judge(gameBoard[i][j + 1])) return true;
+				const current = getBoardWithoutElimination(i, j);
+				if (current !== 0) {
+					const judge = (value) => value === 0 || value === current;
+					if (i > 0 && judge(getBoardWithoutElimination(i - 1, j))) return true;
+					if (i < 3 && judge(getBoardWithoutElimination(i + 1, j))) return true;
+					if (j > 0 && judge(getBoardWithoutElimination(i, j - 1))) return true;
+					if (j < 3 && judge(getBoardWithoutElimination(i, j + 1))) return true;
 				}
 			}
 		}
