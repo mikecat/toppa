@@ -432,4 +432,64 @@ window.addEventListener("DOMContentLoaded", () => {
 				break;
 		}
 	});
+
+	const touchInfo = new Map();
+	elems.gameArea.addEventListener("touchstart", (event) => {
+		if (shouldPreventArrowDefault()) event.preventDefault();
+		const newTouches = event.changedTouches;
+		for (let i = 0; i < newTouches.length; i++) {
+			const touch = newTouches[i];
+			touchInfo.set(touch.id, {sx: touch.pageX, sy: touch.pageY});
+		}
+	});
+	elems.gameArea.addEventListener("touchmove", (event) => {
+		if (shouldPreventArrowDefault()) event.preventDefault();
+		const updatedTouches = event.changedTouches;
+		const threshold = elems.gameBoard.getBoundingClientRect().width / 12;
+		for (let i = 0; i < updatedTouches.length; i++) {
+			const touch = updatedTouches[i];
+			const info = touchInfo.get(touch.id);
+			if (info) {
+				const dx = touch.pageX - info.sx, dy = touch.pageY - info.sy;
+				let swipeDetected = false;
+				if (Math.abs(dx) > Math.abs(dy) * 2) {
+					if (dx >= threshold) {
+						gameMoveRight();
+						swipeDetected = true;
+					}
+					if (dx <= -threshold) {
+						gameMoveLeft();
+						swipeDetected = true;
+					}
+				}
+				if (Math.abs(dy) > Math.abs(dx) * 2) {
+					if (dy >= threshold) {
+						gameMoveDown();
+						swipeDetected = true;
+					}
+					if (dy <= -threshold) {
+						gameMoveUp();
+						swipeDetected = true;
+					}
+				}
+				if (swipeDetected) touchInfo.delete(touch.id);
+			}
+		}
+	});
+	elems.gameArea.addEventListener("touchend", (event) => {
+		if (shouldPreventArrowDefault()) event.preventDefault();
+		const updatedTouches = event.changedTouches;
+		for (let i = 0; i < updatedTouches.length; i++) {
+			const touch = updatedTouches[i];
+			touchInfo.delete(touch.id);
+		}
+	});
+	elems.gameArea.addEventListener("touchcancel", (event) => {
+		if (shouldPreventArrowDefault()) event.preventDefault();
+		const updatedTouches = event.changedTouches;
+		for (let i = 0; i < updatedTouches.length; i++) {
+			const touch = updatedTouches[i];
+			touchInfo.delete(touch.id);
+		}
+	});
 });
