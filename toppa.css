@@ -135,6 +135,10 @@ body {
 	z-index: 2;
 }
 
+#postLink {
+	display: none;
+}
+
 #gameBoard:not(.gameResult) #postButton {
 	display: none;
 }
