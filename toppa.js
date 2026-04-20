@@ -422,7 +422,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 			"回マージし、" + toStringWithComma(gameScore) + "点を獲得しました！");
 		params.append("url", location.origin + location.pathname);
 		params.append("hashtags", "ゲームとっぱ");
-		elems.postLink.href = "https://twitter.com/intent/tweet?" + params.toString();
+		elems.postLink.href = "https://x.com/intent/post?" + params.toString();
 		elems.postLink.click();
 	}
 
