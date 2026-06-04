@@ -4,6 +4,23 @@ window.addEventListener("DOMContentLoaded", async () => {
 	const elems = {};
 	document.querySelectorAll("[id]").forEach((elem) => elems[elem.id] = elem);
 
+	const setPreventUnload = (() => {
+		function preventUnload(event) {
+			event.preventDefault();
+			event.returnValue = "ingame"; // 互換性用
+		}
+		let prevented = false;
+		return (prevent) => {
+			if (prevent) {
+				if (!prevented) window.addEventListener("beforeunload", preventUnload);
+				prevented = true;
+			} else {
+				if (prevented) window.removeEventListener("beforeunload", preventUnload);
+				prevented = false;
+			}
+		};
+	})();
+
 	const images = {
 		[-2]: "img/b.png",
 		[-1]: "img/a.png",
@@ -214,6 +231,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 	function gameResult() {
 		if (status !== STATUS_FINISH) return;
+		setPreventUnload(false);
 		elems.gameBoard.classList.remove("gameFinish");
 		elems.gameBoard.classList.add("gameResult");
 		status = STATUS_RESULT;
@@ -374,6 +392,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 	function gameStart() {
 		if (status === STATUS_INITIAL || status === STATUS_RESULT) {
+			setPreventUnload(true);
 			elems.gameBoard.classList.remove("gameInitial");
 			elems.gameBoard.classList.remove("gameResult");
 			elems.gameBoard.classList.add("gameCountdown");
