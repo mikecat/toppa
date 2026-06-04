@@ -57,8 +57,39 @@ window.addEventListener("DOMContentLoaded", async () => {
 		return;
 	}
 
+	const defaultImages = {...images};
+	const imageSetCache = new Map();
+
+	try {
+		const imageSetList = await getImageSetList();
+		imageSetList.forEach(({id, name}) => {
+			const option = document.createElement("option");
+			option.setAttribute("value", id);
+			option.appendChild(document.createTextNode(name));
+			elems.imgSetSelector.appendChild(option);
+		});
+	} catch (e) {
+		console.error(e);
+	}
+
+	try {
+		const selectedImageSet = window.localStorage.getItem("selectedImageSet");
+		if (selectedImageSet !== null) elems.imgSetSelector.value = selectedImageSet;
+	} catch (e) {
+		console.error(e);
+	}
+
+	elems.imgSetSelector.addEventListener("change", () => {
+		try {
+			window.localStorage.setItem("selectedImageSet", elems.imgSetSelector.value);
+		} catch (e) {
+			console.error(e);
+		}
+	});
+
 	const STATUS_INITIAL = 0;
-	const STATUS_COUNTDOWN = STATUS_INITIAL + 1;
+	const STATUS_LOADING = STATUS_INITIAL + 1;
+	const STATUS_COUNTDOWN = STATUS_LOADING + 1;
 	const STATUS_GAME = STATUS_COUNTDOWN + 1;
 	const STATUS_FINISH = STATUS_GAME + 1;
 	const STATUS_RESULT = STATUS_FINISH + 1;
@@ -231,6 +262,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 	function gameResult() {
 		if (status !== STATUS_FINISH) return;
+		elems.imgSetSelector.disabled = false;
 		setPreventUnload(false);
 		elems.gameBoard.classList.remove("gameFinish");
 		elems.gameBoard.classList.add("gameResult");
@@ -390,8 +422,41 @@ window.addEventListener("DOMContentLoaded", async () => {
 		gameMoveTemplate(boardsTurnRight, boardsTurnLeft);
 	}
 
-	function gameStart() {
+	async function gameStart() {
 		if (status === STATUS_INITIAL || status === STATUS_RESULT) {
+			const prevStatus = status;
+			status = STATUS_LOADING;
+			const imgId = elems.imgSetSelector.value;
+			const imgIdList = [-2, -1, 1, 2, 3, 4, 5, 6];
+			if (imgId === "default") {
+				imgIdList.forEach((id) => images[id] = defaultImages[id]);
+			} else {
+				try {
+					const imgIdNumber = parseInt(imgId, 10);
+					if (isNaN(imgIdNumber)) throw new Error("invalid image set id");
+					const cachedData = imageSetCache.get(imgIdNumber);
+					if (cachedData) {
+						imgIdList.forEach((id) => images[id] = cachedData[id]);
+					} else {
+						const loadedImages = await loadImageSet(imgIdNumber);
+						const imageUrls = {};
+						for (let i = 0; i < imgIdList.length; i++) {
+							const id = imgIdList[i];
+							const image = loadedImages[id];
+							if (!image) throw new Error("invalid image set");
+							imageUrls[id] = URL.createObjectURL(image);
+						}
+						imageSetCache.set(imgIdNumber, imageUrls);
+						imgIdList.forEach((id) => images[id] = imageUrls[id]);
+					}
+				} catch (error) {
+					console.error(error);
+					alert("画像セットが不正です。");
+					status = prevStatus;
+					return;
+				}
+			}
+			elems.imgSetSelector.disabled = true;
 			setPreventUnload(true);
 			elems.gameBoard.classList.remove("gameInitial");
 			elems.gameBoard.classList.remove("gameResult");

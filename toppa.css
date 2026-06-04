@@ -155,3 +155,11 @@ body {
 #gameBoard:not(.gameLoadError) #loadErrorArea {
 	display: none;
 }
+
+#imgSetSelectorArea {
+	margin-top: 3em;
+}
+
+#imgSetManageLinkArea {
+	margin-left: 1em;
+}

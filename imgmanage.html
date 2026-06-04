@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="icon" href="to.ico">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="description" content="ゲーム『とっぱ』で用いる画像セットの管理を行うページ。">
+		<link href="imgmanage.css" rel="stylesheet">
+		<script src="db.js"></script>
+		<script src="imgmanage.js"></script>
+		<title>とっぱ 画像セット管理</title>
+	</head>
+	<body>
+		<h1>とっぱ 画像セット管理</h1>
+		<div id="returnToGameArea">
+			<a href="./">ゲームに戻る</a>
+		</div>
+		<h2>画像セット管理</h2>
+		<div id="imgSetSelectorArea">
+			画像セット名：<select id="imgSetSelector"></select>
+		</div>
+		<div id="imgSetPreviewArea">
+			<img id="imgSet1" src="empty.png">
+			<img id="imgSet2" src="empty.png">
+			<img id="imgSet3" src="empty.png">
+			<img id="imgSet4" src="empty.png">
+			<img id="imgSet5" src="empty.png">
+			<img id="imgSet6" src="empty.png">
+			<img id="imgSetA" src="empty.png">
+			<img id="imgSetB" src="empty.png">
+		</div>
+		<div id="imgSetOperationArea">
+			<button id="imgAddFromFileButton">ファイルから追加</button>
+			<button id="imgSaveToFileButton">ファイルに保存</button>
+			<button id="imgCopyToEditorButton">エディタにコピー</button>
+			<button id="imgDeleteButton">削除</button>
+		</div>
+		<h2>画像セット作成</h2>
+		<div id="setEditorNameArea">
+			画像セット名：
+			<input id="setEditorName" type="text" size="30" value="" autocomplete="off">
+		</div>
+		<div id="setEditorOperationArea">
+			<button id="setEditorSaveLocalButton">このブラウザに保存</button>
+			<button id="setEditorSaveToFileButton">ファイルに保存</button>
+		</div>
+		<h3>通常キャラクター</h3>
+		<div class="setEditorCharacterGrid">
+			<div class="setEditorCharacterStepArea">
+				ステップ1
+			</div>
+			<div class="setEditorCharacterImageArea">
+				<img id="setEditorCharacter1" src="empty.png">
+			</div>
+			<div class="setEditorCharacterChooserArea">
+				<input id="setEditorCharacterChooser1" type="file" accept="image/*" autocomplete="off">
+			</div>
+			<div class="setEditorCharacterStepArea">
+				ステップ2
+			</div>
+			<div class="setEditorCharacterImageArea">
+				<img id="setEditorCharacter2" src="empty.png">
+			</div>
+			<div class="setEditorCharacterChooserArea">
+				<input id="setEditorCharacterChooser2" type="file" accept="image/*" autocomplete="off">
+			</div>
+			<div class="setEditorCharacterStepArea">
+				ステップ3
+			</div>
+			<div class="setEditorCharacterImageArea">
+				<img id="setEditorCharacter3" src="empty.png">
+			</div>
+			<div class="setEditorCharacterChooserArea">
+				<input id="setEditorCharacterChooser3" type="file" accept="image/*" autocomplete="off">
+			</div>
+			<div class="setEditorCharacterStepArea">
+				ステップ4
+			</div>
+			<div class="setEditorCharacterImageArea">
+				<img id="setEditorCharacter4" src="empty.png">
+			</div>
+			<div class="setEditorCharacterChooserArea">
+				<input id="setEditorCharacterChooser4" type="file" accept="image/*" autocomplete="off">
+			</div>
+			<div class="setEditorCharacterStepArea">
+				ステップ5
+			</div>
+			<div class="setEditorCharacterImageArea">
+				<img id="setEditorCharacter5" src="empty.png">
+			</div>
+			<div class="setEditorCharacterChooserArea">
+				<input id="setEditorCharacterChooser5" type="file" accept="image/*" autocomplete="off">
+			</div>
+			<div class="setEditorCharacterStepArea">
+				ステップ6
+			</div>
+			<div class="setEditorCharacterImageArea">
+				<img id="setEditorCharacter6" src="empty.png">
+			</div>
+			<div class="setEditorCharacterChooserArea">
+				<input id="setEditorCharacterChooser6" type="file" accept="image/*" autocomplete="off">
+			</div>
+		</div>
+		<h3>高得点キャラクター</h3>
+		<div class="setEditorCharacterGrid">
+			<div class="setEditorCharacterStepArea">
+				ステップ1
+			</div>
+			<div class="setEditorCharacterImageArea">
+				<img id="setEditorCharacterA" src="empty.png">
+			</div>
+			<div class="setEditorCharacterChooserArea">
+				<input id="setEditorCharacterChooserA" type="file" accept="image/*" autocomplete="off">
+			</div>
+			<div class="setEditorCharacterStepArea">
+				ステップ2
+			</div>
+			<div class="setEditorCharacterImageArea">
+				<img id="setEditorCharacterB" src="empty.png">
+			</div>
+			<div class="setEditorCharacterChooserArea">
+				<input id="setEditorCharacterChooserB" type="file" accept="image/*" autocomplete="off">
+			</div>
+		</div>
+	</body>
+</html>

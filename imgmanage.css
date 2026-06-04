@@ -1,0 +1,65 @@
+#returnToGameArea {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#imgSetPreviewArea {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#imgSetPreviewArea img {
+	margin-left: 0.1em;
+	margin-right: 0.1em;
+	width: 3em;
+	height: 3em;
+	background-color: #ddd;
+}
+
+#imgSetPreviewArea #imgSetA {
+	margin-left: 1em;
+}
+
+#imgSaveToFileButton {
+	margin-left: 1em;
+}
+
+#imgDeleteButton {
+	margin-left: 3em;
+}
+
+#setEditorOperationArea {
+	margin-top: 0.5em;
+}
+
+.setEditorCharacterGrid {
+	display: inline-grid;
+	margin-top: 1em;
+	margin-bottom: 0.75em;
+	grid-template-columns: auto auto auto;
+	align-items: center;
+}
+
+.setEditorCharacterGrid div {
+	padding-bottom: 0.25em;
+}
+
+.setEditorCharacterStepArea {
+	grid-column: 1;
+}
+
+.setEditorCharacterImageArea {
+	grid-column: 2;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+.setEditorCharacterChooserArea {
+	grid-column: 3;
+}
+
+.setEditorCharacterImageArea img {
+	width: 128px;
+	height: 128px;
+	background-color: #ddd;
+}

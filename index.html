@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<meta name="description" content="非公式で『自分自身と向き合おう！デレステ特訓パズル』のルールを再現したゲーム。">
 		<link href="toppa.css" rel="stylesheet">
+		<script src="db.js"></script>
 		<script src="toppa.js"></script>
 		<title>とっぱ</title>
 	</head>
@@ -99,6 +100,15 @@
 					リソースのロードに失敗しました
 				</div>
 			</div>
+		</div>
+		<div id="imgSetSelectorArea">
+			画像セット：
+			<select id="imgSetSelector">
+				<option value="default">デフォルト</option>
+			</select>
+			<span id="imgSetManageLinkArea">
+				<a href="imgmanage.html">管理</a>
+			</span>
 		</div>
 	</body>
 </html>
